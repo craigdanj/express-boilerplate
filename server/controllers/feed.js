@@ -1,14 +1,14 @@
 const { validationResult } = require('express-validator');
-const Post = require('../models/post');
+const User = require('../models/user');
 
-exports.getPosts = (req, res, next) => {
-    Post.findAndCountAll()
-        .then(posts => {
-            const postRows = posts.rows;
-            const total = posts.count;
+exports.getAllUsers = (req, res, next) => {
+    User.findAndCountAll()
+        .then(users => {
+            const userRows = users.rows;
+            const total = users.count;
 
             res.status(200).json({
-                posts: postRows,
+                users: userRows,
                 total
             });
         })
@@ -17,7 +17,7 @@ exports.getPosts = (req, res, next) => {
         });
 };
 
-exports.createPost = (req, res, next) => {
+exports.signUp = (req, res, next) => {
     const errors = validationResult(req);
     if(!errors.isEmpty()) {
         return res.status(422).json({

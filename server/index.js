@@ -3,7 +3,8 @@ const bodyParser = require('body-parser');
 const path = require('path');
 
 const sequelize = require('./database');
-const feedRoutes = require('./routes/feed');
+// const feedRoutes = require('./routes/feed');
+const authRoutes = require('./routes/auth');
 
 const app = express();
 
@@ -17,12 +18,13 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use((req, res ,next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE');
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorisation');
+    res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
     next();
 });
 
 //Routes
-app.use('/feed', feedRoutes);
+// app.use('/feed', feedRoutes);
+app.use('/auth', authRoutes);
 
 //Sync db and start server.
 sequelize
