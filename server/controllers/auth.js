@@ -11,7 +11,7 @@ exports.signUp = (req, res, next) => {
     User.findOne({ where: {email} }).then(user => {
         if(user) {
             res.status(500).json({
-                error: "User already exists"
+                error: "A user with the email id provided already exists"
             });
         } else {
             //Hash password
