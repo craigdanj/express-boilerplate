@@ -1,6 +1,7 @@
 // const { validationResult } = require('express-validator');
 const User = require('../models/user');
 const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 
 exports.signUp = (req, res, next) => {
     const email = req.body.email;
@@ -63,4 +64,52 @@ exports.getUsers = (req, res, next) => {
         .catch( err => {
             console.log(err);
         });
+};
+
+exports.login = (req, res, next) => {
+    const email = req.body.email;
+    const password = req.body.password;
+    let loadedUser = null;
+    User.findOne({ where: {email} }).then(user => {
+        if (user) {
+            loadedUser = user;
+            return bcrypt.compare(password, user.password)
+        } else {
+            //invalid login.
+            const error = new Error("invalid credentials");
+            error.statusCode = 500;
+            throw error;
+        }
+    }).then(isEqual => {
+        if(!isEqual) {
+            const error = new Error("invalid credentials");
+            error.statusCode = 500;
+            throw error;
+        }
+
+        console.log('-------------------')
+        console.log(loadedUser.get('id'));
+        console.log(loadedUser.get('email'));
+
+        const token = jwt.sign({
+            email: loadedUser.get('email'),
+            id: loadedUser.get('id')
+        }, 'thisisasecretsecretkeyohyeah',
+        {
+            expiresIn: '2h'
+        });
+
+        res.status(200).json({
+            token,
+            userId: loadedUser.get('id')
+        });
+
+    })
+    .catch( err => {
+
+        if(!err.statusCode) {
+            err.statusCode = 500;
+        }
+        next(err);
+    });
 };
