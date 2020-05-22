@@ -87,10 +87,6 @@ exports.login = (req, res, next) => {
             throw error;
         }
 
-        console.log('-------------------')
-        console.log(loadedUser.get('id'));
-        console.log(loadedUser.get('email'));
-
         const token = jwt.sign({
             email: loadedUser.get('email'),
             id: loadedUser.get('id')
