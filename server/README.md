@@ -6,7 +6,8 @@ Features:
 - APIs for user sign up and login.
 - An ORM for SQL database operations.
 
-//Add serevr side validations.
+//Add server side validations.
 //Add code for file uploads.
-//Add forgot/reset password functionality.
+//Add send email functionality.
+//Send email with reset password link. Add reset pwd functionality.
 //Add RBAC.
