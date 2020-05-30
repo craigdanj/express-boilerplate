@@ -16,7 +16,6 @@ module.exports = (req, res, next) => {
         error.statusCode = 500;
         throw error;
     }
-    console.log('--------->>', token);
 
     let decodedToken;
     try {
