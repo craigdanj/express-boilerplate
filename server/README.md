@@ -2,7 +2,7 @@
 Boilerplate for an Express JS project.
 
 Features:
-- Boilerplate with structure for routes, controllers, middleware etc.
+- Boilerplate with folder structure for routes, controllers, middleware etc.
 - APIs for user sign up and login.
 - Authentication via JWT.
 - An ORM for SQL database operations.
