@@ -141,12 +141,8 @@ exports.forgotPasword = (req, res, next) => {
 
 };
 
-
 exports.resetPasword = (req, res, next) => {
     const token = req.body.token;
-
-    //When reset password is called check to see if token expired. If yes fail. Else update password in user table.
-
 
     //When reset password is called check to see if token expired. If yes fail. Else update password in user table.
 };
