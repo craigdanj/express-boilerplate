@@ -109,3 +109,44 @@ exports.login = (req, res, next) => {
         next(err);
     });
 };
+
+exports.forgotPasword = (req, res, next) => {
+    const email = req.body.email;
+    if (email) {
+        //Check if user exists.
+        User.findOne({ where: {email} }).then(user => {
+            //We always send a success because we dont want malicious users to be able to detect whether an email they've enetered is registered with our system.
+            res.status(200).json({
+                message: 'An email is sent to your email id'
+            });
+
+            if (user) {
+                return user.id;
+            } else {
+
+            }
+        }).then(userId => {
+            console.log(userId);
+            //If token already exists for user delete existing token.
+            //Generate and store token in resetPassword table along with expiry date.
+
+            //Send email with a link to the reset password page with the token in the url.
+
+        });
+    } else {
+        res.status(500).json({
+            message: 'no email supplied'
+        });
+    }
+
+};
+
+
+exports.resetPasword = (req, res, next) => {
+    const token = req.body.token;
+
+    //When reset password is called check to see if token expired. If yes fail. Else update password in user table.
+
+
+    //When reset password is called check to see if token expired. If yes fail. Else update password in user table.
+};

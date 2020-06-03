@@ -9,5 +9,6 @@ const authController = require('../controllers/auth');
 router.put('/signup', authController.signUp);
 router.get('/getUsers', isAuthenticated, authController.getUsers);
 router.post('/login', authController.login);
+router.post('/forgotPassword', authController.forgotPasword);
 
 module.exports = router;
