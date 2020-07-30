@@ -1,1 +1,3 @@
-# The-Express-Showcase
+# Express-boilerplate
+
+Boilerpate for an Express app.
